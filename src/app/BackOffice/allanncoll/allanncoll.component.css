@@ -1,0 +1,30 @@
+.table {
+    width: 90%;
+}
+
+.main-allanncoll-list {
+    margin-top: 200px !important;
+    margin-bottom: 200px !important;
+    display: flex;
+    flex-direction: column;
+    row-gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+
+.create-btn {
+    outline: none;
+    padding: 10px;
+    font-size: 18px;
+    font-weight: bold;
+    border-radius: 8px;
+    border-color: #fa312f;
+    border: solid 3px #fa312f;
+    color: black;
+    background: white;
+}
+
+.create-btn:hover {
+    background-color: #fa312f;
+    color: white;
+}

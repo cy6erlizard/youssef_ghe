@@ -1,0 +1,31 @@
+<div>
+  <h2>Liste de toutes les colocations</h2>
+
+  <table class="table">
+    <thead>
+    <tr>
+      <th>Titre</th>
+      <th>Date</th>
+      <th>Contenu</th>
+      <th>Image</th>
+      <th>Action</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let collocationBooking of allCollocationBookings">
+      <td>{{ collocationBooking.startDate | date:'medium' }}</td>
+      <td>{{ collocationBooking.endDate }}</td>
+      <td>{{ collocationBooking.statusType }}</td>
+      <td>
+        <button (click)="handleDeleteCollocationBooking(collocationBooking)">Supprimer</button>
+      </td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div *ngIf="allCollocationBookings.length === 0">
+    <p>Aucune colocation n'est disponible pour le moment.</p>
+  </div>
+
+  <button (click)="redirectToCreateCollocationBooking()">Créer une colocation</button>
+</div>

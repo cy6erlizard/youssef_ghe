@@ -51,6 +51,12 @@ public class AnnoncementCollocationServiceImp implements ICRUDService<Annoncemen
         } else {
             return null;
         }}
+    @Override
+    public AnnoncementCollocation getAnnouncementById(Integer id) {
+        Optional<AnnoncementCollocation> announcementOptional = annoncementCollocationRepository.findById(id);
+        return announcementOptional.orElse(null);
+    }
+
 
 }
 

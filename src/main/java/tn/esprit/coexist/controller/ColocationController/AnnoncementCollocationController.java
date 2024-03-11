@@ -2,6 +2,7 @@ package tn.esprit.coexist.controller.ColocationController;
 
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import tn.esprit.coexist.entity.ColocationEntity.AnnoncementCollocation;
 import tn.esprit.coexist.service.ColocationService.AnnoncementCollocation.AnnoncementCollocationServiceImp;
@@ -34,6 +35,16 @@ public class AnnoncementCollocationController {
     @DeleteMapping("/deleteAnnoncementCollocation/{id}")
     public void delete(@PathVariable("id") Integer AnnoncementCollocationId) {
         annoncementCollocationServiceImp.delete(AnnoncementCollocationId);
+    }
+    @GetMapping("/get_AnnoncementById/{id}")
+    public ResponseEntity<AnnoncementCollocation> getAnnouncementById(@PathVariable("id") Integer id) {
+        AnnoncementCollocation announcement = annoncementCollocationServiceImp.getAnnouncementById(id);
+
+        if (announcement != null) {
+            return ResponseEntity.ok(announcement);
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
 

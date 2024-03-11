@@ -4,14 +4,28 @@ import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import tn.esprit.coexist.entity.ColocationEntity.AnnoncementCollocation;
 import tn.esprit.coexist.entity.ColocationEntity.Favoris;
 import tn.esprit.coexist.service.ColocationService.FavorisCollocation.FavorisService;
+import tn.esprit.coexist.service.ColocationService.FavorisCollocation.FavorisServiceImp;
+
+import java.util.List;
 
 @RestController
+@RequestMapping("/Announce")
 @AllArgsConstructor
+@CrossOrigin("*")
+
 public class FavorisController {
     @Autowired
-    FavorisService favorisService ;
+    FavorisServiceImp favorisService ;
+
+
+
+    @GetMapping("/all")
+    public List<Favoris> findAll() {
+        return favorisService.findAll();
+    }
 
     @PostMapping("/addAnnoceCollToFAVORIS/{userId}/{annId}")
     public ResponseEntity<?> addAnnoceCollToFAVORIS(@PathVariable Integer userId, @PathVariable Integer annId) {

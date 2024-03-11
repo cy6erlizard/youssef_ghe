@@ -23,8 +23,16 @@ import java.util.Optional;
 public class FavorisServiceImp implements FavorisService{
     @Autowired
     FavorisRepository favorisRepository ;
+
     UserRepository userRepository ;
+
     AnnoncementCollocationRepository annoncementCollocationRepository;
+
+
+    @Override
+    public List<Favoris> findAll() {
+        return favorisRepository.findAll();
+    }
 
     @Override
     public Favoris addAnnoceCollToFAVORIS(Integer userId, Integer annId) {

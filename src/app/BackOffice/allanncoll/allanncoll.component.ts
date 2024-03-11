@@ -23,7 +23,9 @@ export class AllanncollComponent {
 
   ngOnInit(): void {
     this.collocationService.getAllAnnouncements().subscribe((data) => {
-      this.allAnnouncements = [data];
+            // @ts-ignore
+
+      this.allAnnouncements = data;
 
       this.loadFavoritedAnnouncements(); // Load favorited announcements
     });
@@ -59,7 +61,7 @@ export class AllanncollComponent {
   }
 
   addOrRemoveFavoris(announcement: AnnouncementCollocation) {
-    const userId = 123; // Replace with actual user ID retrieval
+    const userId = 1; // Replace with actual user ID retrieval
 
     const annId = announcement.annoncementCollocationId;
     if (this.favoritedAnnouncements.includes(annId)) {
@@ -68,11 +70,14 @@ export class AllanncollComponent {
         const index = this.favoritedAnnouncements.indexOf(annId);
         if (index !== -1) {
           this.favoritedAnnouncements.splice(index, 1);
+          alert("This AnnoncementCollocation is already in the user's favoris.");
+          // Naviguez vers "/all-announcement-collocation"
+          this.route.navigateByUrl("/annColl");
         }
       });
     } else {
       // Add to favoris
-      this.favorisService.addAnnouncementToFavoris(userId, annId).subscribe(() => {
+      this.favorisService.addAnnoucementFavoris(userId, annId).subscribe(() => {
         this.favoritedAnnouncements.push(annId);
       });
     }

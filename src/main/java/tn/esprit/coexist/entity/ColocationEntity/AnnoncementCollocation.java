@@ -10,6 +10,23 @@ import java.util.List;
 @Entity
 @Data
 public class AnnoncementCollocation  {
+  @Override
+  public String toString() {
+    return "AnnoncementCollocation{" +
+            "annoncementCollocationId=" + annoncementCollocationId +
+            ", homeSize=" + homeSize +
+            ", numPerso=" + numPerso +
+            ", address='" + address + '\'' +
+            ", imageHouse='" + imageHouse + '\'' +
+            ", pricePerPerson=" + pricePerPerson +
+            ", houseType=" + houseType +
+            ", equipmentType=" + equipmentType +
+            ", pictures=" + pictures +
+            ", user=" + user +
+            ", favorisess=" + favorisess +
+            '}';
+  }
+
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Integer annoncementCollocationId;

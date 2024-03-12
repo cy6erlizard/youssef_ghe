@@ -1,6 +1,8 @@
 package tn.esprit.coexist.service.ColocationService.AnnoncementCollocation;
 
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import tn.esprit.coexist.entity.ColocationEntity.AnnoncementCollocation;
@@ -14,8 +16,10 @@ import java.util.Optional;
 @Service
 @AllArgsConstructor
 public class AnnoncementCollocationServiceImp implements ICRUDService<AnnoncementCollocation,Integer>, AnnoncementCollocationService {
+    private static final Logger logger = LoggerFactory.getLogger(AnnoncementCollocationServiceImp.class);
 
-  @Autowired
+
+    @Autowired
     AnnoncementCollocationRepository annoncementCollocationRepository ;
 
     @Override
@@ -41,16 +45,29 @@ public class AnnoncementCollocationServiceImp implements ICRUDService<Annoncemen
 
     @Override
     public AnnoncementCollocation update(Integer id, AnnoncementCollocation Classe1) {
+        logger.info("Updating AnnoncementCollocation with ID: {}", id);
+
         Optional<AnnoncementCollocation> existingSubjectOptional = annoncementCollocationRepository.findById(id);
 
         if (existingSubjectOptional.isPresent()) {
             AnnoncementCollocation existingSubject = existingSubjectOptional.get();
-            existingSubject.setAddress(Classe1.getAddress());
+            logger.debug("Found existing AnnoncementCollocation: {}", existingSubject);
 
-            return annoncementCollocationRepository.save(existingSubject);
+            String newAddress = Classe1.getAddress();
+            logger.debug("New address received: {}", newAddress);
+
+            existingSubject.setAddress(newAddress);
+            logger.info("Address updated to: {}", newAddress);
+
+            AnnoncementCollocation updatedAnnoncement = annoncementCollocationRepository.save(existingSubject);
+            logger.info("AnnoncementCollocation updated successfully: {}", updatedAnnoncement);
+
+            return updatedAnnoncement;
         } else {
+            logger.warn("AnnoncementCollocation with ID {} not found", id);
             return null;
-        }}
+        }
+    }
     @Override
     public AnnoncementCollocation getAnnouncementById(Integer id) {
         Optional<AnnoncementCollocation> announcementOptional = annoncementCollocationRepository.findById(id);
